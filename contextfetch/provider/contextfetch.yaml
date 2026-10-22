@@ -1,0 +1,27 @@
+identity:
+  author: contextfetch
+  name: contextfetch
+  label:
+    en_US: ContextFetch
+  description:
+    en_US: Search the web and read pages as Markdown with the ContextFetch API.
+  icon: icon.svg
+  tags:
+    - search
+credentials_for_provider:
+  contextfetch_api_key:
+    type: secret-input
+    required: true
+    label:
+      en_US: ContextFetch API key
+    placeholder:
+      en_US: Paste your ContextFetch API key
+    help:
+      en_US: Get a free key with 2,500 credits by running curl -X POST https://api.contextfetch.dev/v1/keys/free, or see the docs.
+    url: https://contextfetch.dev/docs
+tools:
+  - tools/search.yaml
+  - tools/get_contents.yaml
+extra:
+  python:
+    source: provider/contextfetch.py

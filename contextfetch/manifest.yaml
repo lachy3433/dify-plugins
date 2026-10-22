@@ -1,0 +1,34 @@
+version: 0.0.1
+type: plugin
+author: contextfetch
+name: contextfetch
+label:
+  en_US: ContextFetch
+description:
+  en_US: Search the web and read pages as Markdown with the ContextFetch API. Results come with full text, query-relevant highlights or pruned context.
+icon: icon.svg
+created_at: '2026-10-22T00:00:00Z'
+repo: https://github.com/lachy3433/dify-plugins/tree/contextfetch-source/contextfetch
+contact: hello@contextfetch.dev
+privacy: PRIVACY.md
+resource:
+  memory: 268435456
+  permission: {}
+plugins:
+  tools:
+    - provider/contextfetch.yaml
+meta:
+  version: 0.0.1
+  arch:
+    - amd64
+    - arm64
+  runner:
+    language: python
+    version: '3.12'
+    entrypoint: main
+  minimum_dify_version: 1.0.0
+tags:
+  - search
+network:
+  domains:
+    - api.contextfetch.dev

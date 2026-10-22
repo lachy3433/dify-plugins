@@ -1,0 +1,49 @@
+identity:
+  name: contextfetch_get_contents
+  author: contextfetch
+  label:
+    en_US: ContextFetch Get Contents
+description:
+  human:
+    en_US: Fetch one or more web pages as Markdown. 1 credit per page that loads.
+  llm: Read one or more web pages and return each as Markdown. With a highlights query, also return the parts of each page relevant to it.
+parameters:
+  - name: urls
+    type: string
+    required: true
+    form: llm
+    label:
+      en_US: URLs
+    human_description:
+      en_US: One or more public page URLs (up to 10), separated by commas, spaces or new lines.
+    llm_description: One or more public http(s) page URLs (up to 10), separated by commas.
+  - name: highlights_query
+    type: string
+    required: false
+    form: llm
+    label:
+      en_US: Highlights Query
+    human_description:
+      en_US: Return the page chunks most relevant to this query as highlights.
+    llm_description: Optional question or topic. When given, the parts of each page relevant to it are returned as highlights.
+  - name: text
+    type: boolean
+    required: false
+    form: form
+    default: true
+    label:
+      en_US: Full Text
+    human_description:
+      en_US: Return each page as Markdown.
+  - name: pruned_context
+    type: boolean
+    required: false
+    form: form
+    default: false
+    label:
+      en_US: Pruned Context
+    human_description:
+      en_US: Return the chunks relevant to the Highlights Query joined in page order, to save tokens.
+extra:
+  python:
+    source: tools/get_contents.py

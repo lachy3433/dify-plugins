@@ -1,0 +1,83 @@
+identity:
+  name: contextfetch_search
+  author: contextfetch
+  label:
+    en_US: ContextFetch Search
+description:
+  human:
+    en_US: Search the web and get results with page Markdown, highlights or pruned context. 1 credit per search.
+  llm: Search the web. Returns a list of results, each with a title, URL, published date and page content relevant to the query.
+parameters:
+  - name: query
+    type: string
+    required: true
+    form: llm
+    label:
+      en_US: Query
+    human_description:
+      en_US: What to search the web for (up to 2,000 characters).
+    llm_description: The search query.
+  - name: num_results
+    type: number
+    required: false
+    form: llm
+    default: 5
+    min: 1
+    max: 25
+    label:
+      en_US: Max Results
+    human_description:
+      en_US: Max number of results to return (1 to 25).
+    llm_description: Max number of results to return, 1 to 25. Default 5.
+  - name: content
+    type: select
+    required: false
+    form: form
+    default: pruned_context
+    label:
+      en_US: Page Content
+    human_description:
+      en_US: What page content to add to each result. With None, results have only title, URL and score.
+    options:
+      - value: pruned_context
+        label:
+          en_US: Pruned context (relevant chunks in page order, saves tokens)
+      - value: highlights
+        label:
+          en_US: Highlights (chunks most relevant to the query)
+      - value: text
+        label:
+          en_US: Full text (the whole page as Markdown)
+      - value: none
+        label:
+          en_US: None
+  - name: include_domains
+    type: string
+    required: false
+    form: llm
+    label:
+      en_US: Include Domains
+    human_description:
+      en_US: Comma-separated domains. Only results from these domains are returned, e.g. docs.python.org, github.com
+    llm_description: Optional comma-separated domains. Only results from these domains are returned.
+  - name: exclude_domains
+    type: string
+    required: false
+    form: llm
+    label:
+      en_US: Exclude Domains
+    human_description:
+      en_US: Comma-separated domains to leave out of the results, e.g. pinterest.com, quora.com
+    llm_description: Optional comma-separated domains to leave out of the results.
+  - name: start_published_date
+    type: string
+    required: false
+    form: llm
+    label:
+      en_US: Published After
+    human_description:
+      en_US: Only return results published on or after this date (ISO 8601, e.g. 2026-01-01).
+    llm_description: Optional. Only return results published on or after this date, ISO 8601 such as 2026-01-01.
+extra:
+  python:
+    source: tools/search.py
